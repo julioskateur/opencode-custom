@@ -1,0 +1,15 @@
+{
+  "browser": {
+    "browserName": "chromium",
+    "isolated": true,
+    "launchOptions": {
+      "executablePath": "/usr/bin/chromium",
+      "headless": true,
+      "args": ["--no-sandbox", "--disable-dev-shm-usage"]
+    }
+  },
+  "timeouts": {
+    "action": 15000,
+    "navigation": 60000
+  }
+}
