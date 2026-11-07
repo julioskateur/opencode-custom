@@ -23,6 +23,16 @@ RUN apk add --no-cache curl tar ca-certificates nodejs npm chromium \
  && chromium --version \
  && playwright-mcp --version
 
+# Outils que bootstrap-tools.sh réinstallait à chaque redémarrage du conteneur.
+# Infisical et pplx vivent sur le volume persistant /root/.config/opencode :
+# seuls les liens sont dans l'image (ils pendent tant que le volume n'est pas monté).
+RUN apk add --no-cache git python3 wget ffmpeg \
+ && ln -sf /root/.config/opencode/bin/infisical-auto /usr/local/bin/infisical \
+ && ln -sf /root/.config/opencode/bin/pplx /usr/local/bin/pplx \
+ && git config --system credential.helper '!gh auth git-credential' \
+ && git config --system --add safe.directory '*' \
+ && git --version && python3 --version && ffmpeg -version | head -1
+
 # Config du serveur MCP Playwright : Chromium d'Alpine + timeouts adaptes
 # aux pages longues (le defaut de 5 s fait echouer les screenshots pleine page).
 COPY playwright-mcp.config.json /etc/playwright-mcp/config.json

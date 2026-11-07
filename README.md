@@ -15,6 +15,11 @@ Build automatique via GitHub Actions → `ghcr.io/julioskateur/opencode-custom:l
 | `chromium` | navigateur headless fourni par Alpine (musl-natif) |
 | `playwright-core` | pilotage du navigateur depuis un script Node |
 | `@playwright/mcp` | serveur MCP Playwright (outils navigateur pour l'agent) |
+| `git`, `python3`, `wget`, `ffmpeg` | outils de base, avant réinstallés par `/workspace/bootstrap-tools.sh` à chaque redémarrage |
+| liens `infisical`, `pplx` | pointent vers les binaires du volume persistant `/root/.config/opencode/bin` |
+
+Retour arrière : remettre dans Coolify l'image taguée au SHA précédent
+(`ghcr.io/julioskateur/opencode-custom:34a9266d108a072e43888083a2cb4dfc1b765a11`, voir l'historique des commits), puis redéployer.
 
 ## Pourquoi le Chromium d'Alpine et pas `playwright install`
 
